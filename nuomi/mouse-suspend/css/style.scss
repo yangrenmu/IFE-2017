@@ -22,8 +22,8 @@
 	}
 	&:hover {
 		img {
-			-webkit-filter: blur(1px);
-			        filter: blur(1px);			
+			-webkit-filter: blur(2px);
+			        filter: blur(2px);			
 		}		
 		.box-spiderman .suspend-border {
 			opacity: 1;
@@ -75,8 +75,8 @@
 			color:transparent;
 			-webkit-background-clip: text;
 			background-size:200% 100%;
-			-webkit-animation: color-animation 3s infinite ;
-			        animation: color-animation 3s infinite ;
+			-webkit-animation: color-animation 4s linear infinite ;
+			        animation: color-animation 4s linear infinite ;
 			@include keyframes(color-animation) { 
 				0% {
 					background-position: 0 0;
@@ -85,12 +85,17 @@
 					background-position: -100% 0;
 				}
 			}
+			h1 {
+				margin-bottom: 20px;
+			}
 			a {
-				margin-top: 20px;
+				margin-bottom: 20px;
 				text-decoration: none;
 				color: #123456;
-				font-size: 16px;
+				font-size: 20px;
 				color:rgba(255,255,255,0.5);
+				cursor: pointer;
+				z-index: 2;
 			}
 			&::before {
 				content: '';
