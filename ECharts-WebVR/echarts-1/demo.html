@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ECharts</title>
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+</head>
+<body>
+	<div id="main" style="width:500px;height:400px;"></div>
+	<script type="text/javascript">
+		let myChart = echarts.init(document.getElementById('main'));
+		let option = {
+			title: {
+                text: 'ECharts NO.1'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量','利润']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: [
+	            {
+	            	type: 'value',
+	            	name: '销量',
+	            	min: 0,
+	            	max: 50,
+	            	interval: 10,
+	            	axisLabel: {
+	            		formatter: '{value} 万件'
+	            	}
+	            },
+	            {
+	            	type: 'value',
+	            	name: '利润',
+	            	min: 0,
+	            	max: 10,
+	            	interval: 2,
+	            	axisLine: {
+		                lineStyle: {
+		                    color: '#675bba'
+		                }
+		            },
+	            	axisLabel: {
+	            		formatter: '{value} 万元'
+	            	}
+	            }
+	        ],
+            series: [
+	            {
+	                name: '销量',
+	                type: 'bar',
+	                itemStyle: {
+	            		normal:{
+	            			//顶部颜色
+	            			color: '#5793f3',
+	            			lineStyle: {
+			            		color: '#5793f3'
+			            	}
+	            		}	
+		            },
+	                data: [5, 20, 36, 10, 10, 20]
+	            },
+	            {
+	            	name: '利润',
+	            	type: 'line',
+	            	
+	            	itemStyle: {
+	            		normal:{
+	            			//顶部颜色
+	            			color: '#675bba',
+	            			lineStyle: {
+			            		color: '#675bba'
+			            	}
+	            		}	
+		            },
+	            	data: [5, 28, 40, 20, 13, 23]
+	            }
+            ]           
+		};
+		myChart.setOption(option);
+	</script>
+</body>
+</html>
