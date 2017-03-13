@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dynamicBinding-02</title>
+</head>
+<body>
+<!-- 	<div>
+		<p style="margin:50px 200px 0; width:500px;">在控制台中输入:</p>
+		<pre>
+			<code>1. app1.data.name // 你访问了 name</code>
+			<code>2. app1.data.age = 100  // 你设置了 age，新的值为100</code>
+			<code>3. app2.data.university // 你访问了 university</code>
+			<code>4. app2.data.major = 'science'  // 你设置了 major，新的值为 science</code>
+		</pre>
+	</div> -->
+	<script type="text/javascript">
+		function Observer(data) {
+			this.data = data;
+			this.walk(data);
+			this.eventBus = new Event();
+		}
+		Observer.prototype = {
+			constructor: Observer,
+			walk : function(obj) {
+				let val;
+				for (let key in obj) {
+					if (obj.hasOwnProperty(key)) {
+						val = obj[key];
+						if (typeof val ==='object') {
+							new Observer(val);
+						}
+					}
+					
+					this.convert(key, val);
+				}
+			},
+			convert : function(key, val) {
+				let self = this;
+				Object.defineProperty(this.data, key, {
+					get: function() {
+						console.log('访问了' + key);
+						return val;
+					},
+					set: function(newVal) {				
+						console.log('你设置了 ' + key + ', 新的值为 ' + newVal);
+						self.eventBus.emit(key, newVal);
+						val = newVal;
+						if (typeof newVal === 'object') {
+							new Observer(newVal);
+						}
+					}
+				});
+			},
+			$watch: function(attr, callback) {
+				this.eventBus.on(attr, callback);
+			}
+		};
+		function Event(){
+			this.events = {};
+		}
+		Event.prototype = {
+			constructor: Event,
+			on: function(name, fn) {
+				//将fn添加到name上;
+				if (!this.events[name]) {
+					this.events[name] = [];
+				}
+				this.events[name].push(fn);
+			},
+			emit: function(attr, arg) {				
+				this.events[attr] && this.events[attr].forEach(function(item){
+					item(arg);
+				});
+			}
+		}
+
+		let app = new Observer({
+			name: 'youngwind',				
+			age: 25
+		});
+		app.$watch('name', function(newVal) {
+			console.log(`我的名字变了,现在已经是：${newVal}了`);
+		});
+		app.$watch('age', function(newVal) {
+			console.log(`我的年纪变了,现在已经是：${newVal}岁了`);
+		});
+
+		
+	</script>
+</body>
+</html>
