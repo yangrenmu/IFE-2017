@@ -5,15 +5,15 @@
 	<title>dynamicBinding-02</title>
 </head>
 <body>
-<!-- 	<div>
+	<div>
 		<p style="margin:50px 200px 0; width:500px;">在控制台中输入:</p>
 		<pre>
-			<code>1. app1.data.name // 你访问了 name</code>
-			<code>2. app1.data.age = 100  // 你设置了 age，新的值为100</code>
-			<code>3. app2.data.university // 你访问了 university</code>
-			<code>4. app2.data.major = 'science'  // 你设置了 major，新的值为 science</code>
+			<code>1. app.data.address={now:'anhui'} // 你设置了 address, 新的值为 [object Object]</code>
+			<code>2. app.data.address.now  // 访问了 address 访问了 now</code>
+			<code>3. app.data.name='xiaoming' // 你设置了 name, 新的值为 xiaoming.我的名字变了,现在已经是：xiaoming 了</code>
+			<code>4. app.data.age = 12  // 你设置了 age, 新的值为 12.我的年纪变了,现在已经是：12岁了</code>
 		</pre>
-	</div> -->
+	</div>
 	<script type="text/javascript">
 		function Observer(data) {
 			this.data = data;
@@ -27,6 +27,7 @@
 				for (let key in obj) {
 					if (obj.hasOwnProperty(key)) {
 						val = obj[key];
+						//遍历对象中的深层对象
 						if (typeof val ==='object') {
 							new Observer(val);
 						}
@@ -46,6 +47,7 @@
 						console.log('你设置了 ' + key + ', 新的值为 ' + newVal);
 						self.eventBus.emit(key, newVal);
 						val = newVal;
+						//访问设置的深层对象 
 						if (typeof newVal === 'object') {
 							new Observer(newVal);
 						}
@@ -68,19 +70,26 @@
 				}
 				this.events[name].push(fn);
 			},
-			emit: function(attr, arg) {				
-				this.events[attr] && this.events[attr].forEach(function(item){
-					item(arg);
-				});
+			emit: function(attr, ...args) {		
+				let self = this;
+				if(!self.events[attr]) {
+					return;
+				}	
+				for (let i = 0; i < self.events[attr].length; i++) {
+					self.events[attr][i].apply(self, args);
+				}
 			}
 		}
 
 		let app = new Observer({
+			address: {
+				now: 'chengdu'
+			},
 			name: 'youngwind',				
 			age: 25
 		});
 		app.$watch('name', function(newVal) {
-			console.log(`我的名字变了,现在已经是：${newVal}了`);
+			console.log(`我的名字变了,现在已经是：${newVal} 了`);
 		});
 		app.$watch('age', function(newVal) {
 			console.log(`我的年纪变了,现在已经是：${newVal}岁了`);
