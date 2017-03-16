@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+	<div>
+	<p style="margin:50px 200px 0; width:500px;font-family:'Courier New';">
+		
+				 let app = new Observer({<br>
+					 &nbsp name: {<br>
+						&nbsp &nbsp lastName: 'cheng',<br>
+						&nbsp &nbsp firstName: 'du'<br>
+					 &nbsp },			<br>
+					 &nbsp age: 25<br>
+				});
+		
+	</p>
+	<p style="margin:20px 200px 20px; width:800px;">firstName 和 lastName 作为 name 的属性，其中任意一个发生变化，都会得出以下结论："name 发生了变化。</p>
+		<p style="margin:10px 200px 0; width:500px;">在控制台中输入:</p>
+		<pre style="margin-top:10px;">
+			<code>1. app.data.name.firstName = 'hahaha'; // 我的姓名发生了变化，可能是姓氏变了，也可能是名字变了。</code>			
+		</pre>
+	</div>
+
+<script type="text/javascript">
+//发布订阅事件
+function Event() {
+	this.events = {};
+}
+Event.prototype = {
+	constructor : Event,
+	//订阅
+	on: function(name, fn) {
+		if (!this.events[name]) {
+			this.events[name] = [];
+		}
+		this.events[name].push(fn);
+	},
+	//发布
+	emit: function(name, ...args) {
+		if (name.indexOf('.') !== -1) {
+			var parent = name.split('.');
+			for (var i =0;i<parent.length;i++){
+				this.emit(parent[i]);
+			}
+		}
+		if (this.events[name]) {
+			for (let i = 0; i < this.events[name].length; i++) {
+				this.events[name][i].apply(this, args);
+			}
+		}
+	}
+}
+let eventBus = new Event();
+
+function Observer(data) {
+	this.data = data; 
+	this.$p = Array.prototype.slice.call(arguments,1)[0] || 'data'; 
+	this.walk(data);
+}
+
+Observer.prototype = {
+	constructor: Observer,
+	walk: function(obj) {
+		let val;
+		for (let key in obj) {
+			if (obj.hasOwnProperty(key)) {
+				val = obj[key];
+				//遍历对象中的深层对象
+				if (typeof val ==='object') {
+					new Observer(val, this.$p + '.' + key);
+				}
+			}
+			this.convert(key, val, this.$p);
+		}
+	},
+	convert: function(key, val, $p) {
+		let self = this;
+		Object.defineProperty(this.data, key, {
+			get: function() {
+				console.log('访问了' + key);
+				return val;
+			},
+			set: function(newVal) {				
+				console.log('你设置了 ' + key + ', 新的值为 ' + newVal);
+				//allkey = parent.key;
+				let allKey = $p + '.' + key;
+				//发布事件
+				eventBus.emit(allKey, newVal);
+				val = newVal;
+				//访问设置的深层对象 
+				if (typeof newVal === 'object') {
+					new Observer(newVal);
+				}
+			}
+		});
+	},
+	$watch: function(name, fn) {
+		//订阅事件
+		eventBus.on(name, fn);
+	}
+}
+let app = new Observer({
+	name: {
+		lastName: 'cheng',
+		firstName: 'du'
+	},			
+	age: 25
+});
+app.$watch('name', function(newVal) {
+	console.log(`我的姓名发生了变化，可能是姓氏变了，也可能是名字变了`);
+});
+console.log('输入：app.data.name.firstName = "hahaha"');
+app.data.name.firstName = 'hahaha';
+</script>
+</body>
+</html>
