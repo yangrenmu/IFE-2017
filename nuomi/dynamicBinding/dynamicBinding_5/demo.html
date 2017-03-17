@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>dynamicBinding_4</title>
+  <title>dynamicBinding_5</title>
 </head>
 <body> 
 	<div id="app">
 		<p>姓名:{{user.name}} </p>
 		<p>年龄:{{user.age}} </p>
 	</div>
+	<p>控制台输入：</p>
+	<pre>
+		app.obj.data.user.name ='cheng'//姓名也会跟着变化
+	</pre>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript">
 		let app = new Vue({
