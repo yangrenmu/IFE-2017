@@ -9,7 +9,7 @@ let musicList = [
 		"name": "酷爱",
 		"singer": "张敬轩",
 		"pic": "http://pic.xiami.net/images/album/img75/1175/3772991464956720.jpg?x-oss-process=image/resize,limit_0,m_pad,w_185,h_185",
-		"url": "http://m10.music.126.net/20170325164957/d9d6e8af5422ac933c50c3424260254b/ymusic/3b65/e449/5dbf/bbc366c82628d65ffde64b431b972d14.mp3"
+		"url": "http://yinyueshiting.baidu.com/data2/music/134374387/3002571490342461128.mp3?xcode=3258613ce12bd4f137ff48ca31f559c2"
 	},
 	{
 		"name": "爱得起",
