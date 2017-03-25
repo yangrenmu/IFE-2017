@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>豆瓣音乐播放器</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/musicList.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="player">
+			<p class="name">歌名</p>
+			<p class="singer">歌手</p>
+			<div class="info">
+				<span class="time">00:00</span>
+				<span class="iconfont volume-icon">&#xe604;</span>
+				<span class="voice-slider">
+					<div class="voice-slider-red"></div>
+					<div class="voice-slider-grey"></div>
+				</span>
+				<div class="sub-button">
+					<label title="歌词">
+						<i class="iconfont lyric" >&#xe98e;</i>
+					</label>
+					<label title="下载">
+						<i class="iconfont download" >&#xe61c;</i>
+					</label>
+					<label title="分享">
+						<i class="iconfont share" >&#xe648;</i>
+					</label>
+					
+				</div>
+			</div>
+			<div class="progressBar">
+				<div class="progressBar-green"></div>
+				<div class="progressBar-grey"></div>
+			</div>
+			<div class="buttons">
+				<label title="收藏">
+					<i class="iconfont enshrine">&#xe619;</i>
+				</label>
+				<label title="删除">
+					<i class="iconfont remove">&#xf0008;</i>
+				</label>
+				<div class="button-control">
+					<label title="上一首">
+						<i class="iconfont prev">&#xe666;</i>
+					</label>
+					<label title="暂停">
+						<i class="iconfont play">&#xe60f;</i>
+					</label>
+					<label title="播放">
+						<i class="iconfont  pause">&#xe61d;</i>
+					</label>
+					<label title="下一首">
+						<i class="iconfont  next">&#xe7a5;</i>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="cover">
+			<div id="cover-animation" class="cover-rotate1" >
+				<img class="cover-img" src="">
+			</div>			
+		</div>
+		<audio src="" id="myMusic">浏览器不支持 audio </audio>
+	</div>
+	<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>
