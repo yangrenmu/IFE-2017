@@ -15,7 +15,7 @@ let musicList = [
 		"name": "爱得起",
 		"singer": "钟嘉欣",
 		"pic": "https://pic.xiami.net/images/album/img89/43189/19102476491472628482.jpg?x-oss-process=image/resize,limit_0,m_pad,w_185,h_185",
-		"url": "http://m10.music.126.net/20170325165632/870bbdcfd6629274cd76911be40225b9/ymusic/756b/f2b1/a437/8e3866bd5134d4802b87838f1ad41421.mp3"
+		"url": "http://om5.alicdn.com/189/43189/431214/1770095119_59945170_l.mp3?auth_key=6af6d315b629cd6d0037ec2ab2916794-1491015600-0-null"
 	},
 	{
 		"name": "快乐崇拜",
