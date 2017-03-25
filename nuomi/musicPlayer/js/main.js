@@ -69,7 +69,7 @@ Player.prototype = {
 			}			
 			if (currentTime === musicTime) {
 				self.index++;
-				self.index = self.index % this.musicList.length;
+				self.index = self.index % self.musicList.length;
 				self.play();
 			}
 			function addZero(s) {
