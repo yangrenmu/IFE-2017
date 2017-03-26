@@ -29,6 +29,8 @@ Player.prototype = {
 	},
 	//载入歌曲、播放
 	play: function() {
+		$('.button-control .pause').hide();
+		$('.button-control .play').show();
 		myMusic.src = this.musicList[this.index].url;
 		$('.name').text(this.musicList[this.index].name);
 		$('.singer').text(this.musicList[this.index].singer);
