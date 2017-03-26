@@ -37,6 +37,10 @@ Player.prototype = {
 		$('.cover-img').get(0).src = this.musicList[this.index].pic;
 		myMusic.play();
 		myMusic.volume = this.volume;
+		if ($('.button-control .play')[0].style.display === 'none') {
+			myMusic.pause();
+			self.progressControl();			
+		}
 		//从新开始动画
 		if ($('#cover-animation').hasClass('cover-rotate1')) {
 			$('#cover-animation').removeClass('cover-rotate1');
@@ -49,6 +53,9 @@ Player.prototype = {
 	//快进控制
 	progressControl: function() {
 		let self = this;
+		if ($('.button-control .play')[0].style.display === 'none') {
+			$('.info .time').text('00:00 / 00:00');			
+		}
 		//获取点击时的歌曲时间
 		$('.progressBar').click(function(e) {
 			let scale = self.barChange(this, e, '.progressBar-green');
