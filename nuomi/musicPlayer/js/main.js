@@ -29,14 +29,13 @@ Player.prototype = {
 	},
 	//载入歌曲、播放
 	play: function() {
-		$('.button-control .pause').hide();
-		$('.button-control .play').show();
-		myMusic.src = this.musicList[this.index].url;
-		$('.name').text(this.musicList[this.index].name);
-		$('.singer').text(this.musicList[this.index].singer);
-		$('.cover-img').get(0).src = this.musicList[this.index].pic;
+		let self = this;
+		myMusic.src = self.musicList[self.index].url;
+		$('.name').text(self.musicList[self.index].name);
+		$('.singer').text(self.musicList[self.index].singer);
+		$('.cover-img').get(0).src = self.musicList[self.index].pic;
 		myMusic.play();
-		myMusic.volume = this.volume;
+		myMusic.volume = self.volume;
 		if ($('.button-control .play')[0].style.display === 'none') {
 			myMusic.pause();
 			self.progressControl();			
